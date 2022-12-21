@@ -93,7 +93,7 @@ def run_mask_ppo_trainer(jsp_instance: np.ndarray) -> None:
         "perform_left_shift_if_possible": True,
         "action_mode": 'task',
         "env_transform": 'mask',
-        "dtype": "float32",
+        "dtype": "float64",
         "verbose": 0,
         "default_visualisations": [
             "gantt_console",
@@ -101,17 +101,20 @@ def run_mask_ppo_trainer(jsp_instance: np.ndarray) -> None:
         ]
     }
     config["framework"] = "torch"
-    config["num_workers"] = 0
+    config["num_workers"] = 2
     config["model"] = {
         "custom_model": "nasuta-torch",
         "custom_model_config": {}
     }
+    _, n_jobs, n_machines = jsp_instance.shape
+    config["horizon"] = n_jobs * n_machines
+    config["log_level"] = 'INFO'
 
     trainer = PPOTrainer(config=config)
 
     for i in range(1):
         train_data = trainer.train()
-        print(train_data)
+        #print(train_data)
 
 
 if __name__ == '__main__':

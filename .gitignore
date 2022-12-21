@@ -9,6 +9,9 @@ resources/jsp_instances
 resources/jps_instance_details
 tests/test_resources
 
+**/wandb
+**/wandb/*
+
 # C extensions
 *.so
 
