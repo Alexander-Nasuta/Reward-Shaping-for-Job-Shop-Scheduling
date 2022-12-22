@@ -1,3 +1,9 @@
+import sys
+import pathlib
+
+path = pathlib.Path(__file__).parent.parent.parent
+sys.path.append(f'{path}')  # import for terminal usage
+
 import pprint
 
 import gym
@@ -31,7 +37,7 @@ mask_ppo_sweep_config_ta41 = {
     'parameters': {
         # Constanst
         "total_timesteps": {
-            'values': [500_000]
+            'values': [1_000_000]
         },
         "n_envs": {
             'values': [8]
@@ -163,7 +169,7 @@ mask_ppo_sweep_config_ta41 = {
         #  Device (cpu, cuda, …) on which the code should be run. Setting it to auto,
         #  the code will be run on the GPU if possible.
         "device": {
-            "values": ["cuda"]  # cpu, mps, auto, cuda
+            "values": ["cpu"]  # cpu, mps, auto, cuda
         },
         # seed: Optional[int] = None,
         # Seed for the pseudo random generators
@@ -206,13 +212,13 @@ mask_ppo_sweep_config_ta41 = {
         # 'net_arch_n_layers' and 'net_arch_n_size' will result in a dict that will be passed to 'net_arch'
         # see code below
         "net_arch_n_layers": {
-            'values': [1, 2]
+            'values': [2, 3, 4, 5]
         },
         "net_arch_n_size": {
             "distribution": "q_uniform",
-            "min": 20,
-            "max": 100,
-            "q": 10
+            "min": 64,
+            "max": 512,
+            "q": 32
         },
 
         # ortho_init: bool = True,
@@ -308,6 +314,6 @@ if __name__ == '__main__':
     wb.agent(
         sweep_id,
         function=perform_run,
-        count=1,
+        count=100,
         project="reward-functions-comparison"
     )
