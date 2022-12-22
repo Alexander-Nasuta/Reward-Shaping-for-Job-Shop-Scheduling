@@ -16,7 +16,7 @@ from sb3_contrib.common.wrappers import ActionMasker
 from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.env_util import make_vec_env
 
-from jsp_experiments.instance_loader import get_instance_std_path_by_name
+from ..instance_loader import get_instance_std_path_by_name
 
 
 class JssEnvSB3Wrapper(gym.Wrapper):
