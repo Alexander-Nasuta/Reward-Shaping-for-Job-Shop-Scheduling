@@ -114,7 +114,7 @@ def run_mask_ppo_trainer(jsp_instance: np.ndarray) -> None:
 
     for i in range(1):
         train_data = trainer.train()
-        #print(train_data)
+        print(train_data)
 
 
 if __name__ == '__main__':

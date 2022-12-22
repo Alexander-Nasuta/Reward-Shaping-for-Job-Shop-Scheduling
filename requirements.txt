@@ -1,0 +1,11 @@
+graph-jsp-env==0.1.0
+graph-jsp-utils==0.0.1
+gym==0.21.0
+JSSEnv==1.0.0
+ortools==9.5.2237
+ray==2.2.0
+stable-baselines3==1.6.2
+sb3-contrib==1.6.2
+torch==1.13.1
+wandb==0.13.7
+

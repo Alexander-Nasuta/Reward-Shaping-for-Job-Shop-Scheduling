@@ -103,6 +103,7 @@ if __name__ == '__main__':
         MaskableActorCriticPolicy,
         env=venv,
         verbose=1,
+        device='cuda',
     )
 
     model.learn(total_timesteps=10_000, callback=tcb)

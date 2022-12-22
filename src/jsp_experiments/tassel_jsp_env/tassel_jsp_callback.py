@@ -31,7 +31,7 @@ class TasselLoggerCallback(BaseCallback):
         logs = {
             "num_timesteps": self.num_timesteps,
             "time [sec]": elapsed_time,
-            "time [min]": elapsed_time/60,
+            "time [min]": elapsed_time / 60,
         }
         for i, (nbla, lts, cts) in enumerate(zip(
                 self.training_env.get_attr("nb_legal_actions"),
@@ -49,7 +49,6 @@ class TasselLoggerCallback(BaseCallback):
         if self.wandb_ref:
             self.wandb_ref.log(logs)
         return True
-
 
     def on_training_end(self) -> None:
         if self.wandb_ref:

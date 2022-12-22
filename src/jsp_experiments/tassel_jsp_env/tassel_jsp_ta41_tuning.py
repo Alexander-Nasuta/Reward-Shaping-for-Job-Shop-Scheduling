@@ -23,7 +23,7 @@ gym.envs.register(
 )
 
 mask_ppo_sweep_config_ta41 = {
-    'method': 'random',
+    'method': 'bayes',
     'metric': {
         'name': 'optimality_gap',
         'goal': 'minimize'
@@ -31,7 +31,7 @@ mask_ppo_sweep_config_ta41 = {
     'parameters': {
         # Constanst
         "total_timesteps": {
-            'values': [1_000_000]
+            'values': [500_000]
         },
         "n_envs": {
             'values': [8]
@@ -152,16 +152,18 @@ mask_ppo_sweep_config_ta41 = {
         # copies running in parallel)
         "n_steps": {
             'values': [
+                512,
                 1024,
                 2048,
-                4096
+                4096,
+                8192
             ]
         },
         # device: Union[th.device, str] = "auto",
         #  Device (cpu, cuda, …) on which the code should be run. Setting it to auto,
         #  the code will be run on the GPU if possible.
         "device": {
-            "values": ["cpu"]  # cpu, mps, auto, cuda
+            "values": ["cuda"]  # cpu, mps, auto, cuda
         },
         # seed: Optional[int] = None,
         # Seed for the pseudo random generators
@@ -302,9 +304,7 @@ def perform_run():
 
 
 if __name__ == '__main__':
-    # o7hh7pgc
-    # sweep_id = wb.sweep(mask_ppo_sweep_config_ta41, project="reward-functions-comparison")
-    sweep_id = "o7hh7pgc"
+    sweep_id = wb.sweep(mask_ppo_sweep_config_ta41, project="reward-functions-comparison")
     wb.agent(
         sweep_id,
         function=perform_run,

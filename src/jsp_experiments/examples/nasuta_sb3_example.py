@@ -48,9 +48,8 @@ if __name__ == '__main__':
         MaskableActorCriticPolicy,
         env=venv,
         verbose=1,
-
-        device='cpu'  # cpu, mps (mac), cuda
+        device='cuda'  # cpu, mps (mac), cuda
     )
 
     log.info("training...")
-    model.learn(total_timesteps=1_000, progress_bar=False)
+    model.learn(total_timesteps=10_000, progress_bar=False)
