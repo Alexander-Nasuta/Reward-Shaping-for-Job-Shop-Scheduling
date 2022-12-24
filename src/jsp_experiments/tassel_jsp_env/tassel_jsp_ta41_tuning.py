@@ -310,10 +310,11 @@ def perform_run():
 
 
 if __name__ == '__main__':
-    sweep_id = wb.sweep(mask_ppo_sweep_config_ta41, project="reward-functions-comparison")
+    sweep_id = "whe2qmxd"
+    # sweep_id = wb.sweep(mask_ppo_sweep_config_ta41, project="reward-functions-comparison")
     wb.agent(
         sweep_id,
         function=perform_run,
-        count=100,
+        count=25,
         project="reward-functions-comparison"
     )
