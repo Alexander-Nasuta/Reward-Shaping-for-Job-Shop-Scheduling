@@ -158,12 +158,12 @@ mask_ppo_sweep_config_ta41 = {
         #  Device (cpu, cuda, …) on which the code should be run. Setting it to auto,
         #  the code will be run on the GPU if possible.
         "device": {
-            "values": ["cpu"]  # cpu, mps, auto, cuda
+            "values": ["cuda"]  # cpu, mps, auto, cuda
         },
         # seed: Optional[int] = None,
         # Seed for the pseudo random generators
         "seed": {
-            "values": [None]
+            "values": [1337]
         },
 
         # verbose: int = 0,
@@ -367,11 +367,12 @@ def perform_run() -> None:
 
 
 if __name__ == '__main__':
-    #sweep_id = wb.sweep(mask_ppo_sweep_config_ta41, project="reward-functions-comparison")
-    sweep_id = 'thbd00dg'
+    # sweep_id = wb.sweep(mask_ppo_sweep_config_ta41, project="reward-functions-comparison")
+    sweep_id = '1stj5jml'
     wb.agent(
         sweep_id,
         function=perform_run,
         count=1,
         project="reward-functions-comparison"
     )
+

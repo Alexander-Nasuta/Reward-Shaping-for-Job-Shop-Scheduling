@@ -56,6 +56,9 @@ mask_ppo_sweep_config_ta41 = {
         "reward_function": {
             'value': 'samsonov'
         },
+        "hyperparameter_tuning": {
+            'value': True
+        },
 
         # reward function parameter factor
         "samsonov-gamma": {
@@ -171,12 +174,12 @@ mask_ppo_sweep_config_ta41 = {
         #  Device (cpu, cuda, …) on which the code should be run. Setting it to auto,
         #  the code will be run on the GPU if possible.
         "device": {
-            "values": ["cpu"]  # cpu, mps, auto, cuda
+            "values": ["cuda"]  # cpu, mps, auto, cuda
         },
         # seed: Optional[int] = None,
         # Seed for the pseudo random generators
         "seed": {
-            "values": [None]
+            "values": [1337]
         },
 
         # verbose: int = 0,
