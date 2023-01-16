@@ -1,4 +1,4 @@
-graph-jsp-env==0.1.0
+graph-jsp-env==0.2.0
 graph-jsp-utils==0.0.1
 gym==0.21.0
 JSSEnv==1.0.0
