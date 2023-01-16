@@ -56,9 +56,7 @@ mask_ppo_sweep_config_ta41 = {
         # gamma: float = 0.99,
         # Discount factor
         "gamma": {
-            "distribution": "uniform",
-            "min": 0.95,
-            "max": 1,
+            "values": [1.0]
         },
         # gae_lambda: float = 0.95,
         # Factor for trade-off of bias vs variance for Generalized Advantage Estimator
@@ -258,6 +256,9 @@ mask_ppo_sweep_config_ta41 = {
         "reward_function": {
             'value': 'nasuta'
         },
+        "hyperparameter_tuning": {
+            'value': True
+        },
 
         # eval params
         "n_eval_episodes": {
@@ -367,7 +368,7 @@ def perform_run() -> None:
 
 if __name__ == '__main__':
     #sweep_id = wb.sweep(mask_ppo_sweep_config_ta41, project="reward-functions-comparison")
-    sweep_id = 'jkiiy50b'
+    sweep_id = 'thbd00dg'
     wb.agent(
         sweep_id,
         function=perform_run,
