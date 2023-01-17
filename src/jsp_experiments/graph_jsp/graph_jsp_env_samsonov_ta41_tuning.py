@@ -35,16 +35,16 @@ mask_ppo_sweep_config_ta41 = {
     'parameters': {
         # Constanst
         "total_timesteps": {
-            'values': [50_000]
+            'values': [250_000]
         },
         "n_envs": {
             'values': [8]
         },
         "benchmark_instance": {
-            'values': ["ft06"]
+            'values': ["ta41"]
         },
         "optimal_makespan": {
-            'value': 54.0
+            'value': 1906.0
         },
         "n_machines": {
             "values": [20]
@@ -101,9 +101,9 @@ mask_ppo_sweep_config_ta41 = {
         # Minibatch size
         "batch_size": {
             'distribution': 'q_log_uniform_values',
-            'min': 32,
-            'max': 3e3,
-            "q": 32
+            'min': 16,
+            'max': 512,
+            "q": 16
         },
         # clip_range: Union[float, Schedule] = 0.2,
         # Clipping parameter, it can be a function of the current progress remaining (from 1 to 0).
@@ -155,7 +155,7 @@ mask_ppo_sweep_config_ta41 = {
         "n_epochs": {
             "distribution": "q_uniform",
             "min": 4,
-            "max": 40,
+            "max": 20,
             "q": 1
         },
 
@@ -165,9 +165,9 @@ mask_ppo_sweep_config_ta41 = {
         # copies running in parallel)
         "n_steps": {
             'values': [
+                512,
                 1024,
                 2048,
-                4096
             ]
         },
         # device: Union[th.device, str] = "auto",
@@ -217,7 +217,7 @@ mask_ppo_sweep_config_ta41 = {
         # 'net_arch_n_layers' and 'net_arch_n_size' will result in a dict that will be passed to 'net_arch'
         # see code below
         "net_arch_n_layers": {
-            'values': [2, 4, 6]
+            'values': [2, 3, 4, 5]
         },
         "net_arch_n_size": {
             "distribution": "q_uniform",
@@ -376,11 +376,12 @@ def perform_run() -> None:
 
 
 if __name__ == '__main__':
-    #sweep_id = wb.sweep(mask_ppo_sweep_config_ta41, project="reward-functions-comparison")
-    sweep_id = 'tqdktiwh'
+    # sweep_id = wb.sweep(mask_ppo_sweep_config_ta41, project="reward-functions-comparison")
+    sweep_id = '04t863nc'
     wb.agent(
         sweep_id,
         function=perform_run,
-        count=3,
+        count=1,
         project="reward-functions-comparison"
     )
+

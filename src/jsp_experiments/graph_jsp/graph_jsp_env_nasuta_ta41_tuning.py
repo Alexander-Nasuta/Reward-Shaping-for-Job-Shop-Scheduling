@@ -35,7 +35,7 @@ mask_ppo_sweep_config_ta41 = {
     'parameters': {
         # Constanst
         "total_timesteps": {
-            'values': [50_000]
+            'values': [250_000]
         },
         "n_envs": {
             'values': [8]
@@ -85,9 +85,9 @@ mask_ppo_sweep_config_ta41 = {
         # Minibatch size
         "batch_size": {
             'distribution': 'q_log_uniform_values',
-            'min': 32,
-            'max': 3e3,
-            "q": 32
+            'min': 16,
+            'max': 512,
+            "q": 16
         },
         # clip_range: Union[float, Schedule] = 0.2,
         # Clipping parameter, it can be a function of the current progress remaining (from 1 to 0).
@@ -139,7 +139,7 @@ mask_ppo_sweep_config_ta41 = {
         "n_epochs": {
             "distribution": "q_uniform",
             "min": 4,
-            "max": 40,
+            "max": 20,
             "q": 1
         },
 
@@ -149,9 +149,9 @@ mask_ppo_sweep_config_ta41 = {
         # copies running in parallel)
         "n_steps": {
             'values': [
+                512,
                 1024,
                 2048,
-                4096
             ]
         },
         # device: Union[th.device, str] = "auto",
@@ -201,7 +201,7 @@ mask_ppo_sweep_config_ta41 = {
         # 'net_arch_n_layers' and 'net_arch_n_size' will result in a dict that will be passed to 'net_arch'
         # see code below
         "net_arch_n_layers": {
-            'values': [1, 2]
+            'values': [2, 3, 4, 5]
         },
         "net_arch_n_size": {
             "distribution": "q_uniform",
@@ -335,7 +335,6 @@ def perform_run() -> None:
             **run_config["model_hyper_parameters"],
         )
 
-
         log.info(f"training the agent")
         model.learn(total_timesteps=sweep_params["total_timesteps"], callback=callbacks)
 
@@ -368,11 +367,10 @@ def perform_run() -> None:
 
 if __name__ == '__main__':
     # sweep_id = wb.sweep(mask_ppo_sweep_config_ta41, project="reward-functions-comparison")
-    sweep_id = '1stj5jml'
+    sweep_id = 'tjnt8my9'
     wb.agent(
         sweep_id,
         function=perform_run,
         count=1,
         project="reward-functions-comparison"
     )
-
