@@ -26,7 +26,7 @@ gym.envs.register(
     kwargs={},
 )
 
-mask_ppo_sweep_config_ta41 = {
+mask_ppo_sweep_config = {
     'method': 'random',
     'metric': {
         'name': 'optimality_gap',
@@ -35,16 +35,16 @@ mask_ppo_sweep_config_ta41 = {
     'parameters': {
         # Constanst
         "total_timesteps": {
-            'values': [250_000]
+            'values': [150_000]
         },
         "n_envs": {
             'values': [8]
         },
         "benchmark_instance": {
-            'values': ["ta41"]
+            'values': ["ft06"]
         },
         "optimal_makespan": {
-            'value': 1906.0
+            'value': 55.0
         },
         "n_machines": {
             "values": [20]
@@ -174,7 +174,7 @@ mask_ppo_sweep_config_ta41 = {
         #  Device (cpu, cuda, …) on which the code should be run. Setting it to auto,
         #  the code will be run on the GPU if possible.
         "device": {
-            "values": ["cuda"]  # cpu, mps, auto, cuda
+            "values": ["auto"]  # cpu, mps, auto, cuda
         },
         # seed: Optional[int] = None,
         # Seed for the pseudo random generators
@@ -217,7 +217,7 @@ mask_ppo_sweep_config_ta41 = {
         # 'net_arch_n_layers' and 'net_arch_n_size' will result in a dict that will be passed to 'net_arch'
         # see code below
         "net_arch_n_layers": {
-            'values': [2, 3, 4, 5]
+            'values': [2, 3, 4]
         },
         "net_arch_n_size": {
             "distribution": "q_uniform",
@@ -263,7 +263,7 @@ mask_ppo_sweep_config_ta41 = {
             'values': [True]
         },
         "perform_left_shift_if_possible": {
-            'values': [True]
+            'values': [False]
         },
         "dtype": {
             'values': ["float32"]
@@ -376,12 +376,13 @@ def perform_run() -> None:
 
 
 if __name__ == '__main__':
-    # sweep_id = wb.sweep(mask_ppo_sweep_config_ta41, project="reward-functions-comparison")
-    sweep_id = '04t863nc'
+    # sweep_id = wb.sweep(mask_ppo_sweep_config, project="reward-functions-comparison")
+    sweep_id = 'hu1pl34k'
     wb.agent(
         sweep_id,
         function=perform_run,
         count=1,
         project="reward-functions-comparison"
     )
+
 

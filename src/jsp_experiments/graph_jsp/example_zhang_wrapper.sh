@@ -1,0 +1,1 @@
+for i in {1..10}; do python example_graph_jsp_env_zhang_ft06_tuning.py; done

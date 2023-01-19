@@ -1,0 +1,1 @@
+for i in {1..10}; do python example_graph_jsp_env_samsonov_tuning.py; done

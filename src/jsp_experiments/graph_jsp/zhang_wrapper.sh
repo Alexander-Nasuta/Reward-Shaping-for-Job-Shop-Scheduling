@@ -1,1 +1,0 @@
-for i in {1..10}; do python graph_jsp_env_zhang_ta41_tuning.py; done

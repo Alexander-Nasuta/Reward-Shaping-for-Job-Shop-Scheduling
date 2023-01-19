@@ -26,7 +26,7 @@ gym.envs.register(
     kwargs={},
 )
 
-mask_ppo_sweep_config_ta41 = {
+mask_ppo_sweep_config = {
     'method': 'random',
     'metric': {
         'name': 'optimality_gap',
@@ -35,30 +35,28 @@ mask_ppo_sweep_config_ta41 = {
     'parameters': {
         # Constanst
         "total_timesteps": {
-            'values': [250_000]
+            'values': [150_000]
         },
         "n_envs": {
             'values': [8]
         },
         "benchmark_instance": {
-            'values': ["ta41"]
+            'values': ["ft06"]
         },
         "optimal_makespan": {
-            'value': 1906.0
+            'value': 55.0
         },
         "n_machines": {
-            "values": [20]
+            "values": [6]
         },
         "n_jobs": {
-            "values": [30]
+            "values": [6]
         },
 
         # gamma: float = 0.99,
         # Discount factor
         "gamma": {
-            "distribution": "uniform",
-            "min": 0.95,
-            "max": 1,
+            "values": [1.0]
         },
         # gae_lambda: float = 0.95,
         # Factor for trade-off of bias vs variance for Generalized Advantage Estimator
@@ -160,7 +158,7 @@ mask_ppo_sweep_config_ta41 = {
         #  Device (cpu, cuda, …) on which the code should be run. Setting it to auto,
         #  the code will be run on the GPU if possible.
         "device": {
-            "values": ["cuda"]  # cpu, mps, auto, cuda
+            "values": ["auto"]  # cpu, mps, auto, cuda
         },
         # seed: Optional[int] = None,
         # Seed for the pseudo random generators
@@ -203,7 +201,7 @@ mask_ppo_sweep_config_ta41 = {
         # 'net_arch_n_layers' and 'net_arch_n_size' will result in a dict that will be passed to 'net_arch'
         # see code below
         "net_arch_n_layers": {
-            'values': [2, 3, 4, 5]
+            'values': [2, 3, 4]
         },
         "net_arch_n_size": {
             "distribution": "q_uniform",
@@ -256,7 +254,7 @@ mask_ppo_sweep_config_ta41 = {
         },
 
         "reward_function": {
-            'value': 'zhang'
+            'value': 'nasuta'
         },
         "hyperparameter_tuning": {
             'value': True
@@ -313,7 +311,9 @@ def perform_run() -> None:
             "normalize_observation_space": sweep_params['normalize_observation_space'],
             "flat_observation_space": sweep_params['flat_observation_space'],
             "perform_left_shift_if_possible": sweep_params['perform_left_shift_if_possible'],
-            "reward_function_parameters": {},
+            "reward_function_parameters": {
+                'scaling_divisor': sweep_params['optimal_makespan']
+            },
             "default_visualisations": [
                 "gantt_window",
             ]
@@ -366,12 +366,11 @@ def perform_run() -> None:
 
 
 if __name__ == '__main__':
-    #sweep_id = wb.sweep(mask_ppo_sweep_config_ta41, project="reward-functions-comparison")
-    sweep_id = '3q9y8fna'
+    #sweep_id = wb.sweep(mask_ppo_sweep_config, project="reward-functions-comparison")
+    sweep_id = 'r92q69at'
     wb.agent(
         sweep_id,
         function=perform_run,
         count=1,
         project="reward-functions-comparison"
     )
-

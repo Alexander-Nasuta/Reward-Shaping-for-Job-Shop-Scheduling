@@ -22,7 +22,6 @@ class GraphJspLoggerCallback(BaseCallback):
 
         self.total_left_shifts = 0
 
-
         self.senv_fields = [
             "makespan",
         ]
@@ -42,7 +41,6 @@ class GraphJspLoggerCallback(BaseCallback):
             "time [sec]": elapsed_time,
             "time [min]": elapsed_time / 60,
         }
-
         ls_list = self._get_vals("left_shift")
         if len(ls_list):
             self.total_left_shifts += sum(ls_list)
@@ -67,6 +65,10 @@ class GraphJspLoggerCallback(BaseCallback):
                 **{f"{f}": mean(self._get_vals(f)) for f in self.venv_fields if self._get_vals(f)},
                 "total_left_shifts": self.total_left_shifts,
                 "left_shift_pct": self.total_left_shifts / self.num_timesteps * 100,
+
+                "reward_mean": mean(self.locals["rewards"]),
+                **{f"reward_mean_{i}": rew for i, rew in enumerate(self.locals['rewards'])},
+
                 **logs
             }
             self.wandb_ref.log(logs)
