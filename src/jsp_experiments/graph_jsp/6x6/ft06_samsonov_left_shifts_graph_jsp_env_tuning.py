@@ -263,7 +263,7 @@ mask_ppo_sweep_config = {
             'values': [True]
         },
         "perform_left_shift_if_possible": {
-            'values': [False]
+            'values': [True]
         },
         "dtype": {
             'values': ["float32"]
@@ -377,7 +377,7 @@ def perform_run() -> None:
 
 if __name__ == '__main__':
     # sweep_id = wb.sweep(mask_ppo_sweep_config, project="reward-functions-comparison")
-    sweep_id = 'hu1pl34k'
+    sweep_id = 'riup4a6v'
     wb.agent(
         sweep_id,
         function=perform_run,
