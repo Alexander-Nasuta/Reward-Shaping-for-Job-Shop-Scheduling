@@ -1,1 +1,1 @@
-for i in {1..50}; do python ft06_tassel_no_leftshifts_graph_jsp_env_tuning.py.py; done
+for i in {1..50}; do python ft06_tassel_no_leftshifts_graph_jsp_env_tuning.py; done
