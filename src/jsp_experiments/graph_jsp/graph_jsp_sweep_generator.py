@@ -338,7 +338,7 @@ def generate_server_script(target_dir, benchmark_instance: str, n_jobs: int, n_m
             ]
     ):
         cmds = f'''
-screen -S {screen_session} -p 0 -X bash -c "bash {target_dir}/{script_wrapper_name}"
+screen -r {screen_session} -X stuff "bash /home/an148650/jsp-reward-comparison/src/jsp_experiments/graph_jsp/{n_jobs}x{n_machines}/{script_wrapper_name}^M"
 '''
         bash_script += cmds
 
@@ -426,6 +426,7 @@ def generate_sweep_code(
         n_machines=n_machines,
         benchmark_instance=benchmark_instance
     )
+    log.info(f"done")
 
 
 if __name__ == '__main__':
