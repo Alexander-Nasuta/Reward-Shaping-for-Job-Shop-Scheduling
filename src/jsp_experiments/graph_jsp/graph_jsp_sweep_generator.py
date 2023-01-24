@@ -291,13 +291,14 @@ if __name__ == '__main__':
         sweep_id,
         function=perform_run,
         count=1,
-        project="dev"
+        project="reward-functions-comparison"
     )
 """
     with open(f"{target_dir}/{filename}.py", "w+") as f:
         f.writelines(python_script)
 
-    bash_script = f"for i in {{1..50}}; do python {filename}.py; done"
+    bash_script = f"""#!/bin/bash
+for i in {{1..50}}; do python {filename}.py; done"""
 
     with open(f"{target_dir}/{filename}_wrapper.sh", "w+") as f:
         f.writelines(bash_script)
@@ -336,12 +337,9 @@ def generate_server_script(target_dir, benchmark_instance: str, n_jobs: int, n_m
 
             ]
     ):
-        cmds = f"""
-screen -r {screen_session}
-cd /home/an148650/jsp-reward-comparison/src/jsp_experiments/graph_jsp/{n_jobs}x{n_machines}
-bash {script_wrapper_name}
-screen -X detach
-"""
+        cmds = f'''
+screen -S {screen_session} -p 0 -X bash -c "bash {target_dir}/{script_wrapper_name}"
+'''
         bash_script += cmds
 
     with open(f"{target_dir}/run_sweeps_with_screen_sessions.sh", "w+") as f:
