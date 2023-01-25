@@ -281,9 +281,16 @@ def generate_sweep_config_dict(
 
 def generate_scripts(filename: str, target_dir, sweep_id: str) -> None:
     python_script = f"""
+import gym
 import wandb as wb
 
 from jsp_experiments.graph_jsp.perform_sweep_run import perform_run
+
+gym.envs.register(
+    id='gjsp-v0',
+    entry_point='graph_jsp_env.disjunctive_graph_jsp_env:DisjunctiveGraphJspEnv',
+    kwargs={{}},
+)
 
 if __name__ == '__main__':
     sweep_id = '{sweep_id}'
