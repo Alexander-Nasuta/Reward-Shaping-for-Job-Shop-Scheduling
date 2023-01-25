@@ -316,10 +316,10 @@ def generate_server_script(target_dir, benchmark_instance: str, n_jobs: int, n_m
                 "zhang_no_ls",
 
                 "sam_ls",
-                "sam_no_ls"
+                "sam_no_ls",
 
                 "tassel_ls",
-                "tassel_no_ls"
+                "tassel_no_ls",
 
             ],
             [
@@ -337,15 +337,13 @@ def generate_server_script(target_dir, benchmark_instance: str, n_jobs: int, n_m
 
             ]
     ):
-        cmds = f'''
+        cmds = f'''# {screen_session}, {script_wrapper_name}
 screen -r {screen_session} -X stuff "bash /home/an148650/jsp-reward-comparison/src/jsp_experiments/graph_jsp/{n_jobs}x{n_machines}/{script_wrapper_name}^M"
 '''
         bash_script += cmds
 
     with open(f"{target_dir}/run_sweeps_with_screen_sessions.sh", "w+") as f:
-       f.writelines(bash_script)
-
-
+        f.writelines(bash_script)
 
 
 def generate_sweep_code(
@@ -416,7 +414,7 @@ def generate_sweep_code(
             generate_scripts(
                 filename=script_name,
                 target_dir=target_dir,
-                sweep_id=sweep_id
+                sweep_id=sweep_id,
             )
 
     log.info(f"generating server script")
