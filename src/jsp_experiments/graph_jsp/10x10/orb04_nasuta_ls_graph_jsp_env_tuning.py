@@ -4,7 +4,7 @@ import wandb as wb
 from jsp_experiments.graph_jsp.perform_sweep_run import perform_run
 
 if __name__ == '__main__':
-    sweep_id = '2any76dg'
+    sweep_id = 'kgjtoth3'
     wb.agent(
         sweep_id,
         function=perform_run,

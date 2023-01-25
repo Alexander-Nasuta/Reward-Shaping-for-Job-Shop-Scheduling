@@ -338,6 +338,7 @@ def generate_server_script(target_dir, benchmark_instance: str, n_jobs: int, n_m
             ]
     ):
         cmds = f'''# {screen_session}, {script_wrapper_name}
+screen -r {screen_session} -X stuff "cd /home/an148650/jsp-reward-comparison/src/jsp_experiments/graph_jsp/{n_jobs}x{n_machines}^M"
 screen -r {screen_session} -X stuff "bash /home/an148650/jsp-reward-comparison/src/jsp_experiments/graph_jsp/{n_jobs}x{n_machines}/{script_wrapper_name}^M"
 '''
         bash_script += cmds
