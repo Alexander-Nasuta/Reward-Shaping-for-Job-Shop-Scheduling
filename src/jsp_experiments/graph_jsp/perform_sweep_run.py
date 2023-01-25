@@ -21,8 +21,6 @@ def perform_run() -> None:
             sync_tensorboard=False,
             monitor_gym=False,  # auto-upload the videos of agents playing the game
             save_code=False,  # optional
-            settings=wandb.Settings(console='off')
-
             # dir=f"{PATHS.WAND_OUTPUT_PATH}/"
     ) as run:
         log.info(f"run name: {run.name}, run id: {run.id}")

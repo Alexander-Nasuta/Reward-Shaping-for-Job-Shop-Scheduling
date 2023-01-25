@@ -286,8 +286,8 @@ import wandb as wb
 
 from jsp_experiments.graph_jsp.perform_sweep_run import perform_run
 
-import os
-os.environ["WANDB_CONSOLE"] = "off"
+# this import is actually important
+import graph_jsp_env.disjunctive_graph_jsp_visualizer
 
 gym.envs.register(
     id='gjsp-v0',

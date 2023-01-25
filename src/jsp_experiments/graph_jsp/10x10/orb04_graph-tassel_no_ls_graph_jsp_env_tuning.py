@@ -4,8 +4,8 @@ import wandb as wb
 
 from jsp_experiments.graph_jsp.perform_sweep_run import perform_run
 
-import os
-os.environ["WANDB_CONSOLE"] = "off"
+# this import is actually important
+import graph_jsp_env.disjunctive_graph_jsp_visualizer
 
 gym.envs.register(
     id='gjsp-v0',
@@ -14,7 +14,7 @@ gym.envs.register(
 )
 
 if __name__ == '__main__':
-    sweep_id = 'fadz92a5'
+    sweep_id = '02m4ufuq'
     wb.agent(
         sweep_id,
         function=perform_run,
