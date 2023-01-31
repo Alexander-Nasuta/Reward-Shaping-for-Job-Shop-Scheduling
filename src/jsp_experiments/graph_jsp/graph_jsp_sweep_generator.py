@@ -308,6 +308,8 @@ if __name__ == '__main__':
         f.writelines(python_script)
 
     bash_script = f"""#!/bin/bash
+# make sure you have an env named jsp setup with all requirements installed
+source activate jsp
 for i in {{1..50}}; do python {filename}.py; done"""
 
     with open(f"{target_dir}/{filename}_wrapper.sh", "w+") as f:
@@ -315,6 +317,28 @@ for i in {{1..50}}; do python {filename}.py; done"""
 
 
 def generate_server_script(target_dir, benchmark_instance: str, n_jobs: int, n_machines: int) -> None:
+    screen_init_script = f""""""
+
+    for screen_session in [
+                "nasuta_ls",
+                "nasuta_no_ls",
+
+                "zhang_ls",
+                "zhang_no_ls",
+
+                "sam_ls",
+                "sam_no_ls",
+
+                "tassel_ls",
+                "tassel_no_ls",
+
+            ]:
+        cmd = f"screen -dmS {screen_session}\n"
+        screen_init_script += cmd
+
+    with open(f"{target_dir}/init_screen_sessions.sh", "w+") as f:
+        f.writelines(screen_init_script)
+
     bash_script = f""""""""
 
     for screen_session, script_wrapper_name in zip(
@@ -443,11 +467,11 @@ if __name__ == '__main__':
     n_layer_size_min = 20
     n_layer_size_max = 200
 
-    benchmark_instance: str = "orb04"
-    optimal_makespan: float = 1005.0
+    benchmark_instance: str = "ta01"
+    optimal_makespan: float = 1231.0
 
     generate_sweep_code(
-        total_timesteps=150_000,
+        total_timesteps=300_000,
         n_layers=n_layers,
         n_layer_size_min=n_layer_size_min,
         n_layer_size_max=n_layer_size_max,

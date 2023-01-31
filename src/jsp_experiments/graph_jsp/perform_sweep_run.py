@@ -52,15 +52,20 @@ def perform_run() -> None:
 
         jsp_instance = get_instance_by_name_as_numpy_array(name=run_config['benchmark_instance'])
 
+        reward_function_parameters = {
+            "gamma": sweep_params['samsonov-gamma'],
+            't_opt': sweep_params['optimal_makespan'],
+        } if sweep_params["samsonov"] else {
+            'scaling_divisor': sweep_params['optimal_makespan'],
+        }
+
         env_kwargs = {
             "jps_instance": jsp_instance,
             'reward_function': sweep_params['reward_function'],
             "normalize_observation_space": sweep_params['normalize_observation_space'],
             "flat_observation_space": sweep_params['flat_observation_space'],
             "perform_left_shift_if_possible": sweep_params['perform_left_shift_if_possible'],
-            "reward_function_parameters": {
-                'scaling_divisor': sweep_params['optimal_makespan']
-            },
+            "reward_function_parameters": reward_function_parameters,
             "default_visualisations": [
                 "gantt_window",
             ]
