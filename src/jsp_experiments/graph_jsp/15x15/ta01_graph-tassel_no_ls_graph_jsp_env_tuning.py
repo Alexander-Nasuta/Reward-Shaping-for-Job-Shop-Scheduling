@@ -14,7 +14,7 @@ gym.envs.register(
 )
 
 if __name__ == '__main__':
-    sweep_id = 'dexcciu2'
+    sweep_id = '4lm53ly1'
     wb.agent(
         sweep_id,
         function=perform_run,

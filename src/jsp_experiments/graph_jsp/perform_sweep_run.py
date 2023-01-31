@@ -1,4 +1,5 @@
 import pprint
+import sys
 
 import sb3_contrib
 import wandb
@@ -55,7 +56,7 @@ def perform_run() -> None:
         reward_function_parameters = {
             "gamma": sweep_params['samsonov-gamma'],
             't_opt': sweep_params['optimal_makespan'],
-        } if sweep_params["samsonov"] else {
+        } if "samsonov" == sweep_params["reward_function"] else {
             'scaling_divisor': sweep_params['optimal_makespan'],
         }
 

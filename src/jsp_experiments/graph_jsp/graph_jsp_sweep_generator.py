@@ -465,13 +465,13 @@ def generate_sweep_code(
 if __name__ == '__main__':
     n_layers = [3, 4, 5, 6]
     n_layer_size_min = 20
-    n_layer_size_max = 200
+    n_layer_size_max = 280
 
     benchmark_instance: str = "ta01"
     optimal_makespan: float = 1231.0
 
     generate_sweep_code(
-        total_timesteps=300_000,
+        total_timesteps=400_000,
         n_layers=n_layers,
         n_layer_size_min=n_layer_size_min,
         n_layer_size_max=n_layer_size_max,
