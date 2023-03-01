@@ -317,7 +317,7 @@ if __name__ == '__main__':
     wb.agent(
         sweep_id,
         function=perform_run,
-        count=5,
+        count=50,
         project="reward-functions-comparison"
         #project="dev"
     )
