@@ -47,6 +47,12 @@ class TasselLoggerCallback(BaseCallback):
                 logs[f"makespan_mean"] = mean([e for e in self.makespans if e != 0])
                 logs[f"optimality_gap_mean"] = mean([e for e in self.opti_gaps if e != 0])
         if self.wandb_ref:
+            logs = {
+                "reward_mean": mean(self.locals["rewards"]),
+                **{f"reward_mean_{i}": rew for i, rew in enumerate(self.locals['rewards'])},
+
+                **logs
+            }
             self.wandb_ref.log(logs)
         return True
 
